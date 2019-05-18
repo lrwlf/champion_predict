@@ -1,0 +1,163 @@
+<template>
+    <div>
+        <h1 v-show='loading'>
+            正在生成冠军预测图···
+        </h1>
+        <h1 v-show='loading'>
+            {{imgok/32*100|numFilter}}%
+        </h1>
+        <canvas ref="mycanvas" width="650px" height="860px" style='display:none'></canvas>
+        <img src='../assets/showpic.jpg' ref='bgpic' @load='loadbg' style='display:none'/>
+	    <img v-for='item in drawpicls' :src="name2path(unils[item].pathname)" @load='loadimg' :key="item.id" ref='pics' style='display:none'>
+        <img id='showpic' :src='showpicsrc'/>
+   </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            canvas:{},
+            unils:[],
+            ctx:{},
+            imgok:0,
+            showpicsrc:'',
+            drawpicls:[],
+            loading:true,
+            uname:[],
+            msg : '',
+        }
+    },
+    methods: {
+        loadbg() {
+            this.imgok++;
+            if(this.imgok==32)
+                this.startDraw()
+        },
+        loadimg() {
+            this.imgok++;
+            if(this.imgok==32)
+                this.startDraw()
+        },
+        startDraw(){
+            this.ctx.drawImage(this.$refs.bgpic,0,0,650,860)
+            var h = 0;
+            for(let i = 0; i < 8; i++){
+                this.ctx.drawImage(this.$refs.pics[i],60,185+h,45,45);
+                var uy = 0;
+                var mid = 82;
+                for(let j = parseInt(this.uname[i].length/2); j < this.uname[i].length; ++j){
+                    if(this.uname[i].length % 2 == 0)
+                    this.ctx.fillText(this.uname[i][j],mid+uy,185+h+60);
+                    else
+                    this.ctx.fillText(this.uname[i][j],mid+uy-5,185+h+60);
+                    uy += 14;
+                }
+                uy = -14;
+                for(let j = parseInt(this.uname[i].length/2)-1; j >=0; --j){
+                    if(this.uname[i].length % 2 == 0)
+                    this.ctx.fillText(this.uname[i][j],mid+uy,185+h+60);
+                    else 
+                    this.ctx.fillText(this.uname[i][j],mid+uy-5,185+h+60);
+                    uy -= 14;
+                }
+                h += 65;
+            }
+            h = 0;
+            for(let i = 8; i < 16; i++){
+                this.ctx.drawImage(this.$refs.pics[i],550,185+h,45,45);
+                var uy = 0;
+                var mid = 574;
+                for(let j = parseInt(this.uname[i].length/2); j < this.uname[i].length; ++j){
+                    if(this.uname[i].length % 2 == 0)
+                    this.ctx.fillText(this.uname[i][j],mid+uy,185+h+60);
+                    else 
+                    this.ctx.fillText(this.uname[i][j],mid+uy-5,185+h+60);
+                    uy += 14;
+                }
+                uy = -14;
+                for(let j = parseInt(this.uname[i].length/2)-1; j >=0; --j){
+                    if(this.uname[i].length % 2 == 0)
+                    this.ctx.fillText(this.uname[i][j],mid+uy,185+h+60);
+                    else
+                    this.ctx.fillText(this.uname[i][j],mid+uy-5,185+h+60); 
+                    uy -= 14;
+                }
+                h += 65;
+            }
+            h = 0;
+            for(let i = 16; i < 20; i++){
+                this.ctx.drawImage(this.$refs.pics[i],163,215+h,45,45);
+                h += 131;
+            }
+            h = 0;
+            for(let i = 20; i < 24; i++){
+                this.ctx.drawImage(this.$refs.pics[i],465,215+h,45,45);
+                h += 131;
+            }
+            h = 0;
+            for(let i = 24; i < 26; i++){
+                this.ctx.drawImage(this.$refs.pics[i],192,278+h,45,45);
+                h += 265;
+            }
+            h = 0;
+            for(let i = 26; i < 28; i++){
+                this.ctx.drawImage(this.$refs.pics[i],420,278+h,45,45);
+                h += 265;
+            }
+            this.ctx.drawImage(this.$refs.pics[28],225,382,45,45);
+            this.ctx.drawImage(this.$refs.pics[29],373,382,45,45);
+            this.ctx.drawImage(this.$refs.pics[30],289.5,313,60,60);
+            this.draw_word(this.msg)
+            this.loading = false;
+            this.showpicsrc = this.canvas.toDataURL('image/png');
+        },
+        draw_word(s){
+            this.ctx.fillStyle = "black";
+            var c = 80;
+            var r = 770;
+            for(let i = 0; i < s.length; ++i){
+                this.ctx.fillText(s[i],c,r);
+                c = c + 19;
+                if(c > 410){c = 80; r += 22;}
+                if(r == 836) break;
+            }
+            
+        }
+
+    },
+    created() {
+        this.unils = this.alluni;
+        // this.drawpicls = this.drawpicls.concat(this.$root.halfquaterls,this.$root.quaterls,this.$root.finalls,this.$root.battlels,this.$root.champion)
+        if(this.drawpicls.length==0) //调试使用
+        {
+            this.drawpicls = [1,22,7,15,44,40,47,32,12,35,11,4,36,14,42,31,36,15,44,32,12,4,37,31,36,32,12,31,36,32,32]
+        }
+        if(this)
+        this.drawpicls.forEach(element => {
+        //初始化uname
+            this.uname.push(this.alluni[element].name) 
+        });
+        this.msg = this.$root.finalword;
+        
+    },
+    mounted(){
+        this.canvas = this.$refs.mycanvas;
+        this.ctx = this.canvas.getContext("2d");
+        this.ctx.font = "12px Microsoft YaHei";
+    },
+    filters: {
+        numFilter(value) {
+        // 截取当前数据到小数点后两位
+            let realVal = parseFloat(value).toFixed(2)
+            return realVal
+        }
+
+    }
+}
+</script>
+<style>
+
+    #showpic{
+        width:100%;
+    }
+</style>

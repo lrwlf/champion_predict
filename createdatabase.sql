@@ -1,0 +1,54 @@
+create table predict_predict_champion_times(
+	id int primary key,
+	uniname char(128),
+	times int
+)default charset = utf8;
+insert into predict_champion_times values (0,'东吴大学',0);
+insert into predict_champion_times values (1,'中国人民大学',0);
+insert into predict_champion_times values (2,'中国科学技术大学',0);
+insert into predict_champion_times values (3,'云南民族大学',0);
+insert into predict_champion_times values (4,'伦敦大学学院',0);
+insert into predict_champion_times values (5,'兰州理工大学',0);
+insert into predict_champion_times values (6,'内蒙古科技大学',0);
+insert into predict_champion_times values (7,'北京师范大学',0);
+insert into predict_champion_times values (8,'北京师范大学珠海分校',0);
+insert into predict_champion_times values (9,'北京邮电大学',0);
+insert into predict_champion_times values (10,'华东师范大学',0);
+insert into predict_champion_times values (11,'华中科技大学',0);
+insert into predict_champion_times values (12,'华侨大学',0);
+insert into predict_champion_times values (13,'华南师范大学',0);
+insert into predict_champion_times values (14,'南开大学',0);
+insert into predict_champion_times values (15,'南昌航空大学科技学院',0);
+insert into predict_champion_times values (16,'吉林大学',0);
+insert into predict_champion_times values (17,'哈尔滨工程大学',0);
+insert into predict_champion_times values (18,'四川大学',0);
+insert into predict_champion_times values (19,'国防科技大学',0);
+insert into predict_champion_times values (20,'国际关系学院',0);
+insert into predict_champion_times values (21,'墨尔本大学',0);
+insert into predict_champion_times values (22,'大连海事大学',0);
+insert into predict_champion_times values (23,'太原理工大学',0);
+insert into predict_champion_times values (24,'山东大学',0);
+insert into predict_champion_times values (25,'山东大学（威海）',0);
+insert into predict_champion_times values (26,'巴黎政治大学',0);
+insert into predict_champion_times values (27,'广西师范大学',0);
+insert into predict_champion_times values (28,'成均馆大学',0);
+insert into predict_champion_times values (29,'新加坡国立大学',0);
+insert into predict_champion_times values (30,'江西财经大学',0);
+insert into predict_champion_times values (31,'沈阳师范大学',0);
+insert into predict_champion_times values (32,'河北大学',0);
+insert into predict_champion_times values (33,'浙江大学城市学院',0);
+insert into predict_champion_times values (34,'海南大学',0);
+insert into predict_champion_times values (35,'清华大学',0);
+insert into predict_champion_times values (36,'澳门大学',0);
+insert into predict_champion_times values (37,'爱丁堡大学',0);
+insert into predict_champion_times values (38,'福建警察学院',0);
+insert into predict_champion_times values (39,'纽约大学',0);
+insert into predict_champion_times values (40,'莫纳什大学',0);
+insert into predict_champion_times values (41,'西安外国语大学',0);
+insert into predict_champion_times values (42,'贵州大学',0);
+insert into predict_champion_times values (43,'郑州西亚斯学院',0);
+insert into predict_champion_times values (44,'重庆工商大学',0);
+insert into predict_champion_times values (45,'香港中文大学',0);
+insert into predict_champion_times values (46,'马来西亚大学',0);
+insert into predict_champion_times values (47,'麦吉尔大学',0);
+select * from predict_champion_times;
